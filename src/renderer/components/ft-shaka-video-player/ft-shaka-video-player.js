@@ -464,14 +464,24 @@ export default defineComponent({
 
     /**
      * @type {{
-     *   uuid: string
-     *   category: SponsorBlockCategory
+     *   uuid: string,
+     *   category: SponsorBlockCategory,
      *   startTime: number,
      *   endTime: number
      * }[]}
      */
     let sponsorBlockSegments = []
     let sponsorBlockAverageVideoDuration = 0
+
+    /**
+     * @type {
+     *   allowed: boolean,
+     *   unskipped: boolean,
+     *   startTime: number | null,
+     *   endTime: number | null
+     * }
+     */
+    const unskip = { allowed: false, unskipped: false, startTime: null, endTime: null }
 
     /**
      * Yes a map would be much more suitable for this (unlike objects they retain the order that items were inserted),
@@ -521,7 +531,7 @@ export default defineComponent({
 
       sponsorBlockSegments.forEach(segment => {
         if (autoSkip.has(segment.category) && currentTime < segment.endTime &&
-          (segment.startTime <= currentTime ||
+          !unskip.unskipped && (segment.startTime <= currentTime ||
             // if we already have a segment to skip, check if there are any that are less than 150ms later,
             // so that we can skip them all in one go (especially useful on slow connections)
             (newTime > 0 && (segment.startTime < newTime || segment.startTime - newTime <= 0.150) && segment.endTime > newTime))) {
@@ -530,13 +540,15 @@ export default defineComponent({
         }
       })
 
-      if (newTime === 0 || video_.ended) {
-        return
+      if (unskip.unskipped &&
+        // after last unskipped sponsor + grace period
+        currentTime >= unskip.endTime + (defaultSkipInterval.value * video_.playbackRate)) {
+        unskip.unskipped = false
       }
 
       const videoEnd = player.seekRange().end
 
-      if (Math.abs(videoEnd - currentTime) < 1 || video_.ended) {
+      if (newTime === 0 || Math.abs(videoEnd - currentTime) < 1 || video_.ended) {
         return
       }
 
@@ -545,6 +557,16 @@ export default defineComponent({
       }
 
       video_.currentTime = newTime
+
+      unskip.startTime = skippedSegments[0].startTime
+      unskip.endTime = skippedSegments.at(-1).endTime
+      unskip.allowed = true
+
+      let unskipTimeout = null
+      if (unskipTimeout) { clearTimeout(unskipTimeout) }
+      unskipTimeout = setTimeout(() => {
+        unskip.allowed = false
+      }, 5000 / video_.playbackRate)
 
       if (sponsorBlockShowSkippedToast.value) {
         skippedSegments.forEach(({ uuid, category }) => {
@@ -2427,6 +2449,13 @@ export default defineComponent({
           }
           break
         }
+        case 'backspace':
+          // only active within ~5 seconds (relative to playback speed) of an autoskip
+          if (unskip.allowed) {
+            video_.currentTime = unskip.startTime
+            unskip.unskipped = true
+          }
+          break
         case KeyboardShortcuts.VIDEO_PLAYER.PLAYBACK.LAST_FRAME:
           // `⌘+,` is for settings in MacOS
           if (!event.metaKey && video_.paused) {
