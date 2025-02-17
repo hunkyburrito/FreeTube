@@ -477,11 +477,20 @@ export default defineComponent({
      * @type {
      *   allowed: boolean,
      *   unskipped: boolean,
-     *   startTime: number | null,
-     *   endTime: number | null
+     *   start: number | null,
+     *   end: number | null
+     *   skips: {
+     *      uuid: string
+     *      startTime: number,
+     *      endTime: number
+     *   }[]
      * }
      */
-    const unskip = { allowed: false, unskipped: false, startTime: null, endTime: null }
+    const unskip = { allowed: false, unskipped: false, startTime: null, endTime: null, skips: [] }
+    let unskipTimeout = null
+
+    /** @type {number | null} */
+    let manualSkipTime = null
 
     /**
      * Yes a map would be much more suitable for this (unlike objects they retain the order that items were inserted),
@@ -518,9 +527,9 @@ export default defineComponent({
      * @param {number} currentTime
      */
     function skipSponsorBlockSegments(currentTime) {
-      const { autoSkip } = sponsorSkips.value
+      const { autoSkip, promptSkip } = sponsorSkips.value
 
-      if (autoSkip.size === 0) {
+      if (autoSkip.size === 0 && promptSkip.size === 0) {
         return
       }
 
@@ -530,25 +539,31 @@ export default defineComponent({
       const skippedSegments = []
 
       sponsorBlockSegments.forEach(segment => {
-        if (autoSkip.has(segment.category) && currentTime < segment.endTime &&
-          !unskip.unskipped && (segment.startTime <= currentTime ||
+        if (currentTime < segment.endTime && (segment.startTime <= currentTime ||
             // if we already have a segment to skip, check if there are any that are less than 150ms later,
             // so that we can skip them all in one go (especially useful on slow connections)
-            (newTime > 0 && (segment.startTime < newTime || segment.startTime - newTime <= 0.150) && segment.endTime > newTime))) {
-          newTime = segment.endTime
+            (autoSkip.has(segment.category) && newTime > 0 && (segment.startTime < newTime || segment.startTime - newTime <= 0.150) && segment.endTime > newTime))) {
+          if (autoSkip.has(segment.category) && !unskip.unskipped) {
+            newTime = segment.endTime
+          } else if (promptSkip.has(segment.category)) {
+            manualSkipTime = segment.endTime
+            if (!unskip.skips.some(skip => skip.uuid === segment.uuid)) {
+              unskip.skips.push({ uuid: segment.uuid, startTime: segment.startTime, endTime: segment.endTime })
+            }
+          }
           skippedSegments.push(segment)
         }
       })
 
-      if (unskip.unskipped &&
-        // after last unskipped sponsor + grace period
-        currentTime >= unskip.endTime + (defaultSkipInterval.value * video_.playbackRate)) {
+      // after last unskipped sponsor + grace period
+      if (unskip.unskipped && currentTime >= unskip.endTime + (defaultSkipInterval.value * video_.playbackRate)) {
+        unskip.allowed = false
         unskip.unskipped = false
       }
 
       const videoEnd = player.seekRange().end
 
-      if (newTime === 0 || Math.abs(videoEnd - currentTime) < 1 || video_.ended) {
+      if (newTime === 0 || manualSkipTime !== null || video_.ended || Math.abs(videoEnd - currentTime) < 1) {
         return
       }
 
@@ -557,12 +572,10 @@ export default defineComponent({
       }
 
       video_.currentTime = newTime
-
       unskip.startTime = skippedSegments[0].startTime
       unskip.endTime = skippedSegments.at(-1).endTime
       unskip.allowed = true
 
-      let unskipTimeout = null
       if (unskipTimeout) { clearTimeout(unskipTimeout) }
       unskipTimeout = setTimeout(() => {
         unskip.allowed = false
@@ -2449,12 +2462,33 @@ export default defineComponent({
           }
           break
         }
-        case 'backspace':
+        case '<':
           // only active within ~5 seconds (relative to playback speed) of an autoskip
           if (unskip.allowed) {
             video_.currentTime = unskip.startTime
+            unskip.allowed = false
             unskip.unskipped = true
           }
+          console.warn(unskip)
+          break
+        case '>':
+          console.warn(manualSkipTime)
+          if (manualSkipTime !== null) {
+            const prevSkip = unskip.skips.shift()
+            unskip.startTime = prevSkip.startTime
+            unskip.endTime = prevSkip.endTime
+
+            video_.currentTime = manualSkipTime
+            manualSkipTime = null
+            unskip.allowed = true
+            unskip.unskipped = false
+
+            if (unskipTimeout) { clearTimeout(unskipTimeout) }
+            unskipTimeout = setTimeout(() => {
+              unskip.allowed = false
+            }, 5000 / video_.playbackRate)
+          }
+          console.warn(unskip)
           break
         case KeyboardShortcuts.VIDEO_PLAYER.PLAYBACK.LAST_FRAME:
           // `⌘+,` is for settings in MacOS
