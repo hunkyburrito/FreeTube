@@ -567,6 +567,7 @@ Settings:
     SponsorBlock Settings: SponsorBlock
     Skip Options:
       Auto Skip: 自动跳过
+      Manual Skip: ''
       Show In Seek Bar: 显示在查找栏中
       Prompt To Skip: 提示跳过
       Do Nothing: 什么也不做

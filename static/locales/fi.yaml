@@ -530,6 +530,7 @@ Settings:
     Skip Options:
       Skip Option: Ohita vaihtoehto
       Auto Skip: Automaattinen ohitus
+      Manual Skip: ''
       Show In Seek Bar: Näytä hakupalkissa
       Do Nothing: Älä tee mitään
       Prompt To Skip: Ehdota ohittamista

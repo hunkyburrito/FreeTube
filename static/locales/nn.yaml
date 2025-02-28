@@ -338,6 +338,7 @@ Settings:
     Skip Options:
       Skip Option: Alternativ for å hoppe over
       Auto Skip: Hopp over automatisk
+      Manual Skip: ''
       Show In Seek Bar: Vis i søkefelt
       Prompt To Skip: Spør om å hoppe over
       Do Nothing: Ikkje gjer noko

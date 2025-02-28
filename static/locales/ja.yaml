@@ -567,6 +567,7 @@ Settings:
     Skip Options:
       Skip Option: スキップの設定
       Auto Skip: 自動スキップ
+      Manual Skip: ''
       Show In Seek Bar: 進行バーに表示
       Prompt To Skip: プロンプトをスキップ
       Do Nothing: 何もしない

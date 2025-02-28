@@ -573,6 +573,7 @@ Settings:
     Skip Options:
       Skip Option: Valkostir við hunsun
       Auto Skip: Hunsa sjálfvirkt
+      Manual Skip: ''
       Show In Seek Bar: Sýna í leitarstiku
       Prompt To Skip: Spyrja hvort eigi að sleppa
       Do Nothing: Gera ekkert

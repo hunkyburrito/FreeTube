@@ -505,6 +505,7 @@ Settings:
     Skip Options:
       Skip Option: Opção para ignorar
       Auto Skip: Ignorar automaticamente
+      Manual Skip: ''
       Show In Seek Bar: Mostrar na barra de progresso
       Prompt To Skip: Perguntar se quero ignorar
       Do Nothing: Nada fazer

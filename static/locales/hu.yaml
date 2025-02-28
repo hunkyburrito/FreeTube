@@ -577,6 +577,7 @@ Settings:
     Skip Options:
       Skip Option: Beállítás kihagyása
       Auto Skip: Automatikus kihagyás
+      Manual Skip: ''
       Show In Seek Bar: Megjelenítés a keresősávban
       Do Nothing: Nincs művelet
       Prompt To Skip: Kérdés kihagyáskor

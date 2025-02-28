@@ -553,6 +553,7 @@ Settings:
     SponsorBlock Settings: SponsorBlock
     Skip Options:
       Auto Skip: Sari automat
+      Manual Skip: ''
       Skip Option: Sari peste această opțiune
       Show In Seek Bar: Arată în bara de derulare
       Prompt To Skip: Întreabă pentru a sării

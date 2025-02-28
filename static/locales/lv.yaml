@@ -485,6 +485,7 @@ Settings:
     Skip Options:
       Skip Option: 'Izlaišanas iestatījums'
       Auto Skip: 'Autoizlaist'
+      Manual Skip: ''
       Show In Seek Bar: 'Rādīt tīšanas joslā'
       Prompt To Skip: 'Jautāt, lai izlaistu'
       Do Nothing: 'Neko nedarīt'

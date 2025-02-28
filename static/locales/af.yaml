@@ -613,6 +613,7 @@ Settings:
     Skip Options:
       Skip Option: 'Slaan opsie oor'
       Auto Skip: 'Slaan outomaties oor'
+      Manual Skip: ''
       Show In Seek Bar: 'Toon in soekbalk'
       Prompt To Skip: 'Vra om oor te slaan'
       Do Nothing: 'Doen niks'

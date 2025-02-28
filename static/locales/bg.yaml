@@ -573,6 +573,7 @@ Settings:
     Skip Options:
       Skip Option: Опция за пропускане
       Auto Skip: Автоматично пропускане
+      Manual Skip: ''
       Show In Seek Bar: Показване в лентата за търсене
       Prompt To Skip: Подкана за пропускане
       Do Nothing: Не правете нищо

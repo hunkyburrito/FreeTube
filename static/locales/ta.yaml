@@ -646,6 +646,7 @@ Settings:
     Skip Options:
       Skip Option: 'விருப்பத்தைத் தவிர்க்கவும்'
       Auto Skip: 'கார் ச்கிப்'
+      Manual Skip: ''
       Show In Seek Bar: 'சீக் பட்டியில் காட்டு'
       Prompt To Skip: 'தவிர்க்க தூண்டுதல்'
       Do Nothing: 'எதுவும் செய்ய வேண்டாம்'

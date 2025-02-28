@@ -595,6 +595,7 @@ Settings:
     Skip Options:
       Skip Option: ''
       Auto Skip: ''
+      Manual Skip: ''
       Show In Seek Bar: ''
       Prompt To Skip: ''
       Do Nothing: ''

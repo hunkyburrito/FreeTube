@@ -585,6 +585,7 @@ Settings:
     Skip Options:
       Skip Option: 'Прапусціць варыянт'
       Auto Skip: 'Аўтаматычны пропуск'
+      Manual Skip: ''
       Show In Seek Bar: 'Паказваць на панэлі перамоткі'
       Prompt To Skip: 'Прапаноўваць прапусціць'
       Do Nothing: 'Нічога не рабіць'

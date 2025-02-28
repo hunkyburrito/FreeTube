@@ -568,6 +568,7 @@ Settings:
     Skip Options:
       Skip Option: Opcja pominięcia
       Auto Skip: Pomijaj automatycznie
+      Manual Skip: ''
       Show In Seek Bar: Pokazuj na pasku postępu
       Prompt To Skip: Zapytaj, czy pominąć
       Do Nothing: Nic nie rób

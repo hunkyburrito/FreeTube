@@ -566,6 +566,7 @@ Settings:
     Skip Options:
       Skip Option: 略過選項
       Auto Skip: 自動略過
+      Manual Skip: ''
       Show In Seek Bar: 在進度列中顯示
       Prompt To Skip: 提示略過
       Do Nothing: 不要做任何事

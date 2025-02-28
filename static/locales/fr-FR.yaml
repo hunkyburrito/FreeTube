@@ -568,6 +568,7 @@ Settings:
     Skip Options:
       Skip Option: Ignorer l'option
       Auto Skip: Ignorer automatiquement
+      Manual Skip: ''
       Show In Seek Bar: Afficher dans la barre de recherche
       Prompt To Skip: Inviter à ignorer
       Do Nothing: Ne rien faire

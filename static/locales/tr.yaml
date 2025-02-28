@@ -575,6 +575,7 @@ Settings:
     Skip Options:
       Skip Option: Atlama Seçeneği
       Auto Skip: Otomatik Atla
+      Manual Skip: ''
       Show In Seek Bar: Arama Çubuğunda Göster
       Prompt To Skip: Atlamak İçin Sor
       Do Nothing: Hiçbir Şey Yapma

@@ -572,6 +572,7 @@ Settings:
       Do Nothing: No hacer nada
       Skip Option: Omitir opción
       Auto Skip: Salto automático
+      Manual Skip: ''
       Prompt To Skip: Solicitar que se omita
     UseDeArrowTitles: Utilizar los títulos para el vídeo de DeArrow
     UseDeArrowThumbnails: Utiliza DeArrow para las miniaturas

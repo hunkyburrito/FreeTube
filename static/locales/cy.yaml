@@ -601,6 +601,7 @@ Settings:
     Skip Options:
       Skip Option: 'Hepgor y Dewis'
       Auto Skip: 'Awto-Hepgor'
+      Manual Skip: ''
       Show In Seek Bar: 'Dangos yn y Bar Chwilio'
       Prompt To Skip: 'Annog i Hepgor'
       Do Nothing: 'Gwneud Dim'

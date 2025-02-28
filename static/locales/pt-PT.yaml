@@ -564,6 +564,7 @@ Settings:
       Show In Seek Bar: Mostrar na barra de progresso
       Skip Option: Opção para ignorar
       Auto Skip: Ignorar automaticamente
+      Manual Skip: ''
       Prompt To Skip: Perguntar se quero ignorar
       Do Nothing: Nada fazer
     Category Color: Cor da categoria

@@ -555,6 +555,7 @@ Settings:
     'SponsorBlock API Url (Default is https://sponsor.ajay.app)': SponsorBlock API-URL (standard er https://sponsor.ajay.app)
     Skip Options:
       Auto Skip: Spring over automatisk
+      Manual Skip: ''
       Skip Option: "'Spring over'-indstilling"
       Prompt To Skip: Spørg om at springe over
       Show In Seek Bar: Vis i statuslinje

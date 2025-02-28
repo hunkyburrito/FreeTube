@@ -566,6 +566,7 @@ Settings:
       Skip Option: Tuỳ chọn bỏ qua
       Show In Seek Bar: Hiển thị trong thanh tiến trình
       Auto Skip: Tự động bỏ qua
+      Manual Skip: ''
       Prompt To Skip: Nhắc nhở bỏ qua
       Do Nothing: Không làm gì
     Notify when sponsor segment is skipped: Thông báo khi đoạn quảng cáo bị bỏ qua
